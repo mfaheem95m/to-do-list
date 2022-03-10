@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React,{useState} from 'react'
+import Todo from "./Todo"
+import "./App.css"
+import TodoForum from './TodoForum'
 function App() {
+  const [todos,setTodos] = useState([
+    {
+      text : "Learn about react",
+      isCompleted: false
+    },
+    {
+      text : "Meet friends for luch ",
+      isCompleted: false
+    },
+    {
+      text : "Build really cool to-do-app ",
+      isCompleted: false
+    }
+  ])
+  const addTodo = text =>{
+const newTodos = [...todos,{text : text, incompleted:false}]
+setTodos(newTodos)
+console.log("f",todos)
+  }
+
+  const isCompleted = index=>{
+    const newTodos= [...todos]
+    newTodos[index].isCompleted=true
+    setTodos(newTodos)
+  }
+
+  const deleteTodo = index =>{
+    const newTodos =[...todos]
+    newTodos.splice(index,1)
+    setTodos(newTodos)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className= "app">
+      <div className= "to-do-list">
+   {todos.map((todo,index) => (
+     <Todo key = {index} index={index} todo={todo} isCompleted = {isCompleted}
+     deleteTodo={deleteTodo}
+     />
+   ))}
+   <TodoForum addTodo={addTodo}/>
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
