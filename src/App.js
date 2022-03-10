@@ -36,7 +36,7 @@ console.log("f",todos)
   }
   return (
     <div className= "app">
-      <div className= "to-do-list">
+      <div >
    {todos.map((todo,index) => (
      <Todo key = {index} index={index} todo={todo} isCompleted = {isCompleted}
      deleteTodo={deleteTodo}
